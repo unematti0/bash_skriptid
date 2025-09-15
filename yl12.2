@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# faili kontroll
+if [ -e /home/melmers/skriptid/nimekiri.txt ]; then
+    echo "fail on olemas."
+else
+    echo "Fail ei ole olemas."
+fi
+
+#nimekitja asukoht
+nimed="/home/melmers/skriptid/nimekiri.txt"
+
+
+
+while read enimi pnimi; do
+#loob paroolid
+     parool=$(date +%s%N${RANDOM}${RANDOM} | sha256sum | head -c12)
+#kasutajanimi koos parooliga
+    kasutajanimi=$(echo $enimi.$pnimi.2 $parool |  sed 'y/õüäöÕÜÄÖ/ouaoOUAO/')
+    echo "${kasutajanimi,,}"
+#lisab kasutaja
+    sudo useradd -m -s /bin/bash $enimi.$pnimi.2
+#lisab kasutajale parooli
+    echo "$enimi.$pnimi.2:$parool" | sudo chpasswd
+done < "$nimed"
