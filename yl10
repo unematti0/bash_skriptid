@@ -1,18 +1,27 @@
 #!/bin/bash
 
+#küsib user password ja group muutujaid
 read -p "Kasutaja: " user
 read -sp "Parool: " password
-read -p "Sisestage gruppi nimi(tühi = ilam grupita):" group
+read -p "Sisestage gruppi nimi(tühi = kylalise grupp):" group
 
+#lisba kasutaja
 sudo useradd -m -s /bin/bash $user
+#lisab kasutajale parooli
 echo "$user:$password" | sudo chpasswd
+
+#kui $group muutuja on tühi lisab kasutaja kylalise gruppi muidu loob sisetsttud guppi nimega gruppi ja lisab kasutaja sinna
 if [ -z $group ]; then
   sudo usermod -a -G kylaline $user
 else
 sudo groupadd $group
 sudo usermod -a -G $group $user
 fi
+
+#ütleb et kasutaja loodi
 echo "User '$user' has been created with the password '$password'"
+
+#loob uue kasutaja kontole kausta nimega kaust ja lisab teksti fiali mmis sisladab uue kasutaja nime
 sudo mkdir /home/$user/kaust
 sudo touch /home/$user/kaust/teretulemast_$user.txt
 
