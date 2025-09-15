@@ -1,0 +1,11 @@
+#!/bin/bash
+
+read -p "Kasutaja: " user
+read -sp "Parool: " password
+
+sudo useradd -m -s /bin/bash $user
+echo "$user:$password" | sudo chpasswd
+echo "User '$user' has been created with the password '$password'"
+sudo mkdir /home/$user/kaust
+sudo touch /home/$user/kaust/teretulemast_$user.txt
+
