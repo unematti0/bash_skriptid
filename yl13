@@ -1,0 +1,10 @@
+#!/bin/bash
+
+function varunda() {
+date=$(date '+%Y-%m-%d %H:%M')
+faili_nimi=basename $1
+
+touch /home/melmers/backup/$faili_nimi_$date
+}
+
+varunda 
