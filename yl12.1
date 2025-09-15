@@ -1,0 +1,8 @@
+#!/bin/bash
+kasutajad="/etc/passwd"
+
+while IFS="/" read u p i; do
+   if [ $p = "home" ]; then
+  echo "$u"
+fi
+done < "$kasutajad"
