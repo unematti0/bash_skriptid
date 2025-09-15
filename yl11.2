@@ -2,9 +2,14 @@
 read -p "sisesta faili asukoht mida soovid kontrollida: " fail
 read -p "sisesta soovitud õigused: " oigused
 
-if [ ("stat -c %a $fail") = $oigused  ]; then
+if [ ! -f $fail ]; then
+  echo "File not found!"
+elif [ "$(stat -c %a "$fail")" = "$oigused" ]; then
+  echo "File found!"
   echo "failil on õigused $oigused"
 else
-  echo "failil on hoopis õigused ("stat -c %a $fail")"
+  echo "File found!"
+  echo "failil on hoopis õigused:"
+  stat -c %a "$fail"
 fi
 
