@@ -1,0 +1,10 @@
+#!/bin/bash
+#küsib millist teenust kontrollida ja lisab selle tenus muutujasse
+read -p "millist teenust kontrollida: " teenus
+
+#kui käsk systemctl is-active {teenus} annab outbuti "active" ütle et teenus on aktiivne ja kui nii ei ole ütleb et teenus ei ole aktiivne
+if [ "$(systemctl is-active "$teenus")" = "active" ]; then
+  echo "$teenus on aktiivne"
+else
+  echo "$teenus ei ole aktiivne"
+fi

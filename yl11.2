@@ -1,0 +1,10 @@
+#!/bin/bash
+read -p "sisesta faili asukoht mida soovid kontrollida: " fail
+read -p "sisesta soovitud õigused: " oigused
+
+if [ ("stat -c %a $fail") = $oigused  ]; then
+  echo "failil on õigused $oigused"
+else
+  echo "failil on hoopis õigused ("stat -c %a $fail")"
+fi
+
