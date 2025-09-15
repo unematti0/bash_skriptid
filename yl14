@@ -1,0 +1,33 @@
+#!/bin/bash
+
+echo "1: Uuendab paketihalduri andmeid ja uuendab tarkvara"
+echo "2: paigaldab apache2 tarkvara ja käivitab selle teenuse."
+echo "3: eemaldab apache2 tarkvara"
+echo "4: väljub menüüst"
+read number
+
+case $number in
+   1)
+   echo "Sisestasid number 1"
+   sudo apt update
+   sudo apt upgrade -y
+   ;;
+   2)
+   echo "Sisestasid number 2"
+   sudo apt install apache2 -y
+   sudo systemctl start apache2
+   ;;
+   3)
+   echo "Sisestasid number 3"
+   sudo systemctl stop apache2 -y
+   sudo apt remove apache2
+   ;;
+   4)
+   echo "Sisestasid number 4"
+   echo "Sulgen programmi"
+      sleep 2
+      break
+      ;;
+   *) echo "Kontrolli sisestust: $number";;
+   esac
+done
