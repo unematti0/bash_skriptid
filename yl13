@@ -1,10 +1,12 @@
 #!/bin/bash
 
 function varunda() {
-date=$(date '+%Y-%m-%d %H:%M')
-faili_nimi=basename $1
-
-touch /home/melmers/backup/$faili_nimi_$date
+        date=$(date +%Y-%m-%d_%H-%M)
+        faili_nimi_laiendiga=$(basename $1)
+        faili_nimi=${faili_nimi_laiendiga%%.*}
+        laiendi=${faili_nimi_laiendiga##*.}
+        touch /home/melmers/backup/"$faili_nimi"_"$date"."$laiendi"
+        cp $1 /home/melmers/backup/"$faili_nimi"_"$date"."$laiendi"
 }
-
-varunda 
+read -p "millist faili soovite backup-ida(täielik asukoht): " backup
+varunda $backup
