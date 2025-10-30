@@ -29,5 +29,4 @@ case $number in
       break
       ;;
    *) echo "Kontrolli sisestust: $number";;
-   esac
-done
+esac
